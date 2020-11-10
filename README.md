@@ -4,7 +4,7 @@ A web client that sends and receives HTTP messages. [XAMPP](https://apachefriend
 ## Installation (Linux)
 
 ### Dependencies
-```shell script
+```shell
 $ chmod 755 xampp-linux-*-installer.run
 $ sudo ./xampp-linux-*-installer.run
 $ sudo apt-get install valgrind
