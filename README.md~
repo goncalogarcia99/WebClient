@@ -1,5 +1,5 @@
 # WebClient
-A web client that sends and receives HTTP messages. [XAMPP](https://apachefriends.org/index.html) is used as a testing web server.
+A web client that sends and receives HTTP messages. [XAMPP](https://apachefriends.org/index.html/) is used as a testing web server.
 
 ## Installation (Linux)
 
