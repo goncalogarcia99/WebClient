@@ -14,10 +14,10 @@ $ sudo apt-get install valgrind
 ```shell
 $ make
 $ sudo /opt/lampp/lampp start
-$ valgrind --leak-check=full ./web_client URL
+$ valgrind --leak-check=full --undef-value-errors=no ./web_client URL
 ```
 
 **Notes:**  
 XAMPP isn't required to run this program.  
-`valgrind --leak-check=full` can be omitted, this way a memory check won't be performed.
+`valgrind --leak-check=full --undef-value-errors=no` can be omitted, this way a memory check won't be performed. `--undef-value-errors=no` disables undefined value errors (also speeds up the memory checking process).
 

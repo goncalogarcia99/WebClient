@@ -10,7 +10,6 @@
 
 #define URL_HOST_SIZE 256
 #define URL_PATH_SIZE 512
-#define URL_SIZE 768
 
 int get_url_host(const char *url, char *host, size_t host_size);
 int get_url_path(const char *url, char *path, size_t path_size);
@@ -23,7 +22,7 @@ int main(int argc, char **argv) {
 
 	char url_host[URL_HOST_SIZE], url_path[URL_PATH_SIZE];
 	if (get_url_host(argv[1], url_host, URL_HOST_SIZE) || get_url_path(argv[1], url_path, URL_PATH_SIZE)) {
-		fprintf(stderr, "\nInvalid URL (don't forget any slashes).\n");
+		fprintf(stderr, "\nInvalid URL.\n");
 		return -1;
 	}
 
@@ -53,7 +52,7 @@ int main(int argc, char **argv) {
 
 	struct addrinfo *i;
 	int socket_file_descriptor;
-	char host_name[NI_MAXHOST]; // 1025 bytes.
+	char host_name[URL_HOST_SIZE];
 	// The following loop is responsible for trying each address (found by getaddrinfo()) in addr_info, until a connection is successfully established.
 	for (i = addr_info; NULL != i; i = i->ai_next) {
 		socket_file_descriptor = socket(i->ai_family, i->ai_socktype, i->ai_protocol);
@@ -99,9 +98,9 @@ int main(int argc, char **argv) {
 
 	int status_code = http_get_status_code(response_message);
 	if (HTTP_MOVED_PERMANENTLY_STATUS_CODE == status_code || HTTP_FOUND_STATUS_CODE == status_code) { // Redirect.
-		char new_url[URL_SIZE]; // Includes the beginning and terminating slashes.
-		if (http_get_new_url(response_message, new_url, URL_SIZE)) {
-			fprintf(stderr, "\nError: couldn't get new location.\n");
+		char new_url[URL_HOST_SIZE + URL_PATH_SIZE]; // Includes the beginning and terminating slashes.
+		if (http_get_new_url(response_message, new_url, URL_HOST_SIZE + URL_PATH_SIZE)) {
+			fprintf(stderr, "\nError: couldn't get new location (probably HTTPS, not HTTP).\n");
 			close(socket_file_descriptor);
 			return -1;
 		}
@@ -149,8 +148,6 @@ int get_url_path(const char *url, char *path, size_t path_size) {
 	if (NULL == aux) // The slash wasn't found.
 		return -1;
 	size_t path_length = strlen(aux);
-	if (1 < path_length && NULL == strchr(aux + 1, '/')) // Terminating slash is missing.
-		return -1;
 	if (path_length >= path_size)
 		return -1;
 	memcpy(path, aux, path_length);

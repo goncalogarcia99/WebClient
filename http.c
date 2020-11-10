@@ -27,7 +27,6 @@ int http_receive_response_message(int socket_file_descriptor, char *response_mes
 
 int http_get_status_code(const char *http_response_message) {
 	char status_code[4]; // Three digits and a null character.
-	// memset(&status_code, 0, sizeof status_code);
 	memcpy(status_code, &http_response_message[9], 3); // The three digit status code starts at the nineth position in http_response_message.
 	status_code[4] = '\0';
 	return atoi(status_code);
