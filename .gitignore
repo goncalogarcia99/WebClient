@@ -1,3 +1,9 @@
 # Ignore gedit backups.
 *~
+# Ignore intermediate files.
+*.i
+*.s
+*.o
+# Ignore the executable file.
+web_client
 
