@@ -19,5 +19,5 @@ $ valgrind --leak-check=full ./web_client URL
 
 **Notes:**  
 XAMPP isn't required to run this program.  
-```valgrind --leak-check=full``` can be omitted, this way a memory check won't be performed.
+```$ valgrind --leak-check=full``` can be omitted, this way a memory check won't be performed.
 
