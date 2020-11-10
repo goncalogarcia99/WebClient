@@ -11,7 +11,7 @@ $ sudo apt-get install valgrind
 ```
 
 ### Running Instructions
-```shell script
+```shell
 $ make
 $ sudo /opt/lampp/lampp start
 $ valgrind --leak-check=full ./web_client URL
@@ -19,5 +19,5 @@ $ valgrind --leak-check=full ./web_client URL
 
 **Notes:**  
 XAMPP isn't required to run this program.  
-```shell script $ valgrind --leak-check=full``` can be omitted, this way a memory check won't be performed.
+`valgrind --leak-check=full` can be omitted, this way a memory check won't be performed.
 
