@@ -41,7 +41,7 @@ int main(int argc, char **argv) {
 	*/
 	struct addrinfo hints;
 	memset(&hints, 0, sizeof hints); // Reset hints.
-	hints.ai_family = AF_UNSPEC; // AF_UNSPEC : internet addresses are used (data will be shared with a computer, or more, on the internet), IPv4 and IPv6.
+	hints.ai_family = AF_UNSPEC; // AF_UNSPEC: internet addresses are used (data will be shared with a computer, or more, on the internet), IPv4 and IPv6.
 	hints.ai_socktype = SOCK_STREAM; // SOCK_STREAM: data is read in a continuous stream. SOCK_DGRAM: data is read in chunks.
 	hints.ai_protocol = 0; // No protocol specified, the most appropriate one is chosen - TCP for stream sockets and UDP for datagram sockets.
 	struct addrinfo *addr_info;
@@ -66,35 +66,27 @@ int main(int argc, char **argv) {
 			freeaddrinfo(addr_info);
 			return -1;
 		}
-		fprintf(stderr, "\n\na%sa\n\n", host_name);
 		if (!connect(socket_file_descriptor, i->ai_addr, i->ai_addrlen)) // Connection successful.
 			break;
 		close(socket_file_descriptor);
 	}
+	freeaddrinfo(addr_info);
 	if (NULL == i) { // No address succeeded.
 		fprintf(stderr, "\nError: couldn't connect.\n");
-		freeaddrinfo(addr_info);
 		return -1;
 	}
-	freeaddrinfo(addr_info);
 
 	Http_request_message http_request_message = {
 		.method = "GET",
 		.path = url_path,
 		.version = HTTP_VERSION,
 		.host = host_name}; // Not the host's address.
-	if (http_send_request_message(socket_file_descriptor, &http_request_message)) {
-		fprintf(stderr, "\nError: couldn't write.\n");
-		close(socket_file_descriptor);
-		return -1;
-	}
 	char response_message[HTTP_RESPONSE_MESSAGE_SIZE];
-	if (http_receive_response_message(socket_file_descriptor, response_message, HTTP_RESPONSE_MESSAGE_SIZE)) {
-		fprintf(stderr, "\nError: couldn't read.\n");
+	if (http_request_and_response(socket_file_descriptor, &http_request_message, response_message, HTTP_RESPONSE_MESSAGE_SIZE)) {
+		fprintf(stderr, "\nError: couldn't write or read.\n");
 		close(socket_file_descriptor);
 		return -1;
 	}
-	fprintf(stderr, "\n%s\n", response_message);
 
 	int status_code = http_get_status_code(response_message);
 	if (HTTP_MOVED_PERMANENTLY_STATUS_CODE == status_code || HTTP_FOUND_STATUS_CODE == status_code) { // Redirect.
@@ -110,15 +102,9 @@ int main(int argc, char **argv) {
 			close(socket_file_descriptor);
 			return -1;
 		}
-		fprintf(stderr, "\n\na%sa\n\n", new_path);
 		http_request_message.path = new_path;
-		if (http_send_request_message(socket_file_descriptor, &http_request_message)) {
-			fprintf(stderr, "\nError: couldn't write.\n");
-			close(socket_file_descriptor);
-			return -1;
-		}
-		if (http_receive_response_message(socket_file_descriptor, response_message, HTTP_RESPONSE_MESSAGE_SIZE)) {
-			fprintf(stderr, "\nError: couldn't read.\n");
+		if (http_request_and_response(socket_file_descriptor, &http_request_message, response_message, HTTP_RESPONSE_MESSAGE_SIZE)) {
+			fprintf(stderr, "\nError: couldn't write or read.\n");
 			close(socket_file_descriptor);
 			return -1;
 		}
@@ -152,6 +138,5 @@ int get_url_path(const char *url, char *path, size_t path_size) {
 		return -1;
 	memcpy(path, aux, path_length);
 	path[path_length + 1] = '\0';
-	fprintf(stderr, "\n\na%sa\n\n", path);
 	return 0;
 }

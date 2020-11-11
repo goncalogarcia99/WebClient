@@ -4,7 +4,7 @@
 #include <string.h>
 #include <unistd.h>
 
-int http_send_request_message(int socket_file_descriptor, Http_request_message *http_request_message) {
+int http_request_and_response(int socket_file_descriptor, Http_request_message *http_request_message, char *response_message, size_t response_message_size) {
 	char message[HTTP_REQUEST_MESSAGE_SIZE];
 	snprintf(message, sizeof message, "%s %s HTTP/%s\r\nHost: %s\r\n\r\n",
 				http_request_message->method,
@@ -14,10 +14,6 @@ int http_send_request_message(int socket_file_descriptor, Http_request_message *
 	size_t message_length = strlen(message);
 	if (message_length != write(socket_file_descriptor, message, message_length))
 		return -1;
-	return 0;
-}
-
-int http_receive_response_message(int socket_file_descriptor, char *response_message, size_t response_message_size) {
 	size_t bytes_read = read(socket_file_descriptor, response_message, response_message_size - 1);
 	if (-1 == bytes_read)
 		return -1;
