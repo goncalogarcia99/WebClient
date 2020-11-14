@@ -31,6 +31,8 @@ Valgrind's `--undef-value-errors=no` option disables warnings regarding undefine
 
 ### [XAMPP](https://apachefriends.org/index.html) - Web Server (Apache Distribution)
 
+XAMPP can be used as a testing web server.
+
 #### Installation (Linux)
 
 ```shell
@@ -43,6 +45,4 @@ $ sudo ./xampp-linux-*-installer.run
 ```shell
 $ sudo /opt/lampp/lampp start
 ```
-
-XAMPP can be used as a testing web server.
 
