@@ -29,7 +29,7 @@ $ valgrind --leak-check=full ./web_client URL
 
 Valgrind's `--undef-value-errors=no` option disables warnings regarding undefined values (and also speeds up the memory checking process), however, suppressing warnings isn't a good practice.
 
-### [XAMPP](https://apachefriends.org/index.html) - Web Server (An Apache Distribution)
+### [XAMPP](https://apachefriends.org/index.html) - Web Server (Apache Distribution)
 
 #### Installation (Linux)
 
@@ -38,7 +38,7 @@ $ chmod 755 xampp-linux-*-installer.run
 $ sudo ./xampp-linux-*-installer.run
 ```
 
-#### Starting The Server (Linux)
+#### Starting Instructions (Linux)
 
 ```shell
 $ sudo /opt/lampp/lampp start
