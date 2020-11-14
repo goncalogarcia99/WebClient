@@ -16,6 +16,16 @@ $ make
 $ ./web_client URL
 ```
 
+## Optional Tools
+
+### Valgrind
+
+#### Installation (Linux)
+
+```shell
+$ sudo apt-get install valgrind
+```
+
 **Notes:**  
 XAMPP and Valgrind aren't required to run this program.  
 `sudo /opt/lampp/lampp start` starts XAMPP.  
