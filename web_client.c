@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
 	char url_host[URL_HOST_SIZE], url_path[URL_PATH_SIZE];
 	if (get_url_host(argv[1], url_host, URL_HOST_SIZE) || get_url_path(argv[1], url_path, URL_PATH_SIZE)) {
-		fprintf(stderr, "\nInvalid URL. %s %d\n", __FILE__, __LINE__);
+		fprintf(stderr, "\nInvalid URL.\n");
 		return -1;
 	}
 
