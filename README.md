@@ -27,7 +27,7 @@ $ sudo apt-get install valgrind
 $ valgrind --leak-check=full ./web_client URL
 ```
 
-Valgrind's `--undef-value-errors=no` option disables warnings regarding undefined values (and also speeds up the memory checking process), however, suppressing warnings isn't a good practice.
+Valgrind's `--undef-value-errors=no` option disables warnings regarding undefined values (also speeds up the memory checking process), however, suppressing warnings isn't a good practice.
 
 ### [XAMPP](https://apachefriends.org/index.html) - Web Server (Apache Distribution)
 
