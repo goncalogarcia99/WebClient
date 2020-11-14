@@ -13,21 +13,23 @@ $ ./web_client URL
 
 ## Optional Tools
 
-### Valgrind - For Memory Checking
+### Valgrind - Memory Checker (Linux Only)
 
-#### Installation (Linux)
+#### Installation
 
 ```shell
 $ sudo apt-get install valgrind
 ```
 
-#### Usage (Linux)
+#### Running Instructions
 
 ```shell
 $ valgrind --leak-check=full ./web_client URL
 ```
 
-### [XAMPP](https://apachefriends.org/index.html) - Web Server For Testing (An Apache Distribution)
+Valgrind's `--undef-value-errors=no` option disables warnings regarding undefined values (and also speeds up the memory checking process), however, suppressing warnings isn't a good practice.
+
+### [XAMPP](https://apachefriends.org/index.html) - Web Server (An Apache Distribution)
 
 #### Installation (Linux)
 
@@ -36,13 +38,11 @@ $ chmod 755 xampp-linux-*-installer.run
 $ sudo ./xampp-linux-*-installer.run
 ```
 
-#### Starting The Server
+#### Starting The Server (Linux)
 
 ```shell
 $ sudo /opt/lampp/lampp start
 ```
 
-Valgrind's `--undef-value-errors=no` option disables warnings regarding undefined values (and also speeds up the memory checking process), however, suppressing warnings isn't a good practice.
-
-**Notes:**  
+XAMPP can be used as a testing web server.
 
