@@ -8,7 +8,7 @@ $ make
 
 ## Running Instructions
 ```shell
-$ ./web_client \<URL>
+$ ./web_client <URL>
 ```
 
 ## Optional Tools
@@ -24,7 +24,7 @@ $ sudo apt-get install valgrind
 #### Running Instructions
 
 ```shell
-$ valgrind --leak-check=full ./web_client URL
+$ valgrind --leak-check=full ./program <args>
 ```
 
 Valgrind's `--undef-value-errors=no` option disables warnings regarding undefined values (also speeds up the memory checking process), however, suppressing warnings isn't a good practice.
