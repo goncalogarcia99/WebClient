@@ -1,7 +1,7 @@
 # WebClient
 A web client that sends and receives HTTP messages.
 
-## Installation (Preprocess, Compile, Assemble and Link)
+## Installation - Preprocess, Compile, Assemble and Link
 ```shell
 $ make
 ```
