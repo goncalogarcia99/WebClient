@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 
 	char url_host[URL_HOST_SIZE], url_path[URL_PATH_SIZE];
 	if (get_url_host(argv[1], url_host, URL_HOST_SIZE) || get_url_path(argv[1], url_path, URL_PATH_SIZE)) {
-		fprintf(stderr, "\nInvalid URL.\n");
+		fprintf(stderr, "\nInvalid URL. %s %d\n", __FILE__, __LINE__);
 		return -1;
 	}
 
@@ -39,13 +39,13 @@ int main(int argc, char **argv) {
 		struct addrinfo *ai_next;
 	};
 	*/
-	struct addrinfo hints;
-	memset(&hints, 0, sizeof hints); // Reset hints.
+	struct addrinfo hints = {0};
 	hints.ai_family = AF_UNSPEC; // AF_UNSPEC: internet addresses are used (data will be shared with a computer, or more, on the internet), IPv4 and IPv6.
 	hints.ai_socktype = SOCK_STREAM; // SOCK_STREAM: data is read in a continuous stream. SOCK_DGRAM: data is read in chunks.
 	hints.ai_protocol = 0; // No protocol specified, the most appropriate one is chosen - TCP for stream sockets and UDP for datagram sockets.
 	struct addrinfo *addr_info;
-	if (getaddrinfo(url_host, HTTP_PORT_NUMBER, &hints, &addr_info)) { // int getaddrinfo(const char *node, const char *service, const struct addrinfo *hints, struct addrinfo **res).
+	// int getaddrinfo(const char *node, const char *service, const struct addrinfo *hints, struct addrinfo **res).
+	if (getaddrinfo(url_host, HTTP_PORT_NUMBER, &hints, &addr_info)) {
 		fprintf(stderr, "\nError: couldn't get host's info (getaddrinfo()).\n");
 		return -1;
 	}
@@ -87,9 +87,12 @@ int main(int argc, char **argv) {
 		close(socket_file_descriptor);
 		return -1;
 	}
+	fprintf(stderr, "\n%s\n", response_message);
 
 	int status_code = http_get_status_code(response_message);
-	if (HTTP_MOVED_PERMANENTLY_STATUS_CODE == status_code || HTTP_FOUND_STATUS_CODE == status_code) { // Redirect.
+	// The next block is responsible for redirecting the HTTP request, if necessary and possible. In order to keep things simple, only one redirection
+	// is performed.
+	if (HTTP_MOVED_PERMANENTLY_STATUS_CODE == status_code || HTTP_FOUND_STATUS_CODE == status_code) {
 		char new_url[URL_HOST_SIZE + URL_PATH_SIZE]; // Includes the beginning and terminating slashes.
 		if (http_get_new_url(response_message, new_url, URL_HOST_SIZE + URL_PATH_SIZE)) {
 			fprintf(stderr, "\nError: couldn't get new location (probably HTTPS, not HTTP).\n");

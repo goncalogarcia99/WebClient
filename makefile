@@ -4,8 +4,7 @@ TARGET = web_client
 HEADER_FILES = http.h
 OBJECT_FILES = $(TARGET).o http.o
 
-# This built-in target with no dependencies causes intermediate
-# files not to be removed.
+# This built-in target with no dependencies causes intermediate files not to be removed.
 .SECONDARY:
 
 all: $(TARGET)
@@ -14,8 +13,7 @@ all: $(TARGET)
 $(TARGET): $(OBJECT_FILES)
 	$(CC) $^ -o $@
 
-# Preprocess, compile and assemble the main file (separately,
-# bacause it depends on all header files).
+# Preprocess, compile and assemble the main file (separately, because it depends on all header files).
 $(TARGET).o: $(TARGET).c $(HEADER_FILES)
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -1,5 +1,5 @@
-#ifndef HTTP
-#define HTTP
+#ifndef HTTP_H
+#define HTTP_H
 
 #include <stdlib.h> // For size_t.
 
