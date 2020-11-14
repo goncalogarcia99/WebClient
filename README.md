@@ -8,7 +8,7 @@ $ make
 
 ## Running Instructions
 ```shell
-$ ./web_client \<URL\>
+$ ./web_client `<URL>`
 ```
 
 ## Optional Tools
