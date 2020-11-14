@@ -1,18 +1,13 @@
 # WebClient
 A web client that sends and receives HTTP messages.
 
-## Installation (Linux)
-
-### Optional Dependencies (XAMPP and Valgrind)
-```shell
-$ chmod 755 xampp-linux-*-installer.run
-$ sudo ./xampp-linux-*-installer.run
-$ sudo apt-get install valgrind
-```
-
-### Running Instructions
+## Installation
 ```shell
 $ make
+```
+
+## Running Instructions
+```shell
 $ ./web_client URL
 ```
 
