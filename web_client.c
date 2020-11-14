@@ -16,7 +16,7 @@ int get_url_path(const char *url, char *path, size_t path_size);
 
 int main(int argc, char **argv) {
 	if (2 != argc) {
-		fprintf(stderr, "\nUsage: %s URL\n", argv[0]);
+		fprintf(stderr, "\nUsage: %s <URL>\n", argv[0]);
 		return -1;
 	}
 
