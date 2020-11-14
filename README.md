@@ -3,7 +3,7 @@ A web client that sends and receives HTTP messages. [XAMPP](https://apachefriend
 
 ## Installation (Linux)
 
-### Dependencies
+### Optional Dependencies (XAMPP and Valgrind)
 ```shell
 $ chmod 755 xampp-linux-*-installer.run
 $ sudo ./xampp-linux-*-installer.run
@@ -13,11 +13,11 @@ $ sudo apt-get install valgrind
 ### Running Instructions
 ```shell
 $ make
-$ sudo /opt/lampp/lampp start
-$ valgrind --leak-check=full --undef-value-errors=no ./web_client URL
+$ ./web_client URL
 ```
 
 **Notes:**  
-XAMPP isn't required to run this program.  
-`valgrind --leak-check=full --undef-value-errors=no` can be omitted, this way a memory check won't be performed. `--undef-value-errors=no` disables undefined value errors (also speeds up the memory checking process).
+XAMPP and Valgrind aren't required to run this program.  
+`sudo /opt/lampp/lampp start` starts XAMPP.  
+`valgrind --leak-check=full ./web_client URL` performs a memory check. Valgrind's `--undef-value-errors=no` option disables warnings regarding undefined values (and also speeds up the memory checking process), however, suppressing warnings isn't a good practice.
 
