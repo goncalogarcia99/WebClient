@@ -7,7 +7,7 @@ $ make
 ```
 
 ## Running Instructions
-```console
+```powershell
 $ ./web_client <URL>
 ```
 
