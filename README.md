@@ -1,12 +1,15 @@
 # WebClient
+
 A web client that sends and receives HTTP messages.
 
 ## Installation
+
 ```shell
 $ make
 ```
 
 ## Running Instructions
+
 ```shell
 $ ./web_client <URL>
 ```
@@ -41,7 +44,6 @@ $ sudo ./xampp-linux-*-installer.run
 ```
 
 #### Starting Instructions (Linux)
-
 ```shell
 $ sudo /opt/lampp/lampp start
 ```
