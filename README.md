@@ -7,7 +7,7 @@ $ make
 ```
 
 ## Running Instructions
-```shell
+```console
 $ ./web_client <URL>
 ```
 
